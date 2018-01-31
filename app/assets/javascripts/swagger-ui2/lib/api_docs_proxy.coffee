@@ -18,13 +18,7 @@ class ApiDocsProxy
       if _.isUndefined obj.method
         obj.method = obj.type || "POST" # fallback to POST
 
-      patt = new RegExp(":\/\/.*\.execute-api\..*amazonaws\.com")
-      res = patt.test(obj.originalUrl)
-      if res || window.ApiDocsProxy.beta
-        obj.url = 'https://apidocsresty.3sca.net/api_docs/proxy'
-      else
-        obj.url = @locationOrigin() + '/api_docs/proxy'
-
+      obj.url = @locationOrigin() + '/api_docs/proxy'
       obj.url += '?_=' + (new Date).getTime() # cache buster
 
       # console.log "[ApiDocsProxy] proxying #{obj.originalUrl}"
